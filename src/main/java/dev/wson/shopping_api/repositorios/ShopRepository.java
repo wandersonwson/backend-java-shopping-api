@@ -10,5 +10,5 @@ import java.time.LocalDate;
 public interface ShopRepository extends JpaRepository<Shop, Long> {
     List<Shop> findAllByUsuarioId(String usuarioId);
     List<Shop> findAllByTotalGreaterThan(float total);
-    List<Shop> findAllByDataGreaterThanEquals(LocalDate data);
+    List<Shop> findAllByDataGreaterThanEqual(LocalDate data);
 }

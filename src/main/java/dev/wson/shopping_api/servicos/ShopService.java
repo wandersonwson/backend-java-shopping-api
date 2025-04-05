@@ -1,5 +1,6 @@
 package dev.wson.shopping_api.servicos;
 
+import dev.wson.shopping_api.modelos.ItemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import dev.wson.shopping_api.modelos.Shop;
@@ -18,7 +19,7 @@ public class ShopService {
     public ShopDTO salvar(ShopDTO shopDTO) {
         shopDTO.setTotal(shopDTO.getItens()
             .stream()
-            .map(x -> x.getPreco())
+            .map(ItemDTO::getPreco)
             .reduce((float) 0, Float::sum)
         );
         Shop shop = Shop.converterParaShop(shopDTO);
@@ -39,7 +40,7 @@ public class ShopService {
             .collect(Collectors.toList());
     }
     public List<ShopDTO> buscarPorData(LocalDate data) {
-        List<Shop> shops = shopRepository.findAllByDataGreaterThanEquals(data);
+        List<Shop> shops = shopRepository.findAllByDataGreaterThanEqual(data);
         return shops.stream()
             .map(ShopDTO::converterParaShopDTO)
             .collect(Collectors.toList());
