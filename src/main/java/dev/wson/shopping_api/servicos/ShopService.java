@@ -39,8 +39,8 @@ public class ShopService {
             .map(ShopDTO::converterParaShopDTO)
             .collect(Collectors.toList());
     }
-    public List<ShopDTO> buscarPorData(LocalDate data) {
-        List<Shop> shops = shopRepository.findAllByDataGreaterThanEqual(data);
+    public List<ShopDTO> buscarPorData(ShopDTO shopDTO) {
+        List<Shop> shops = shopRepository.findAllByDataGreaterThanEqual(shopDTO.getData());
         return shops.stream()
             .map(ShopDTO::converterParaShopDTO)
             .collect(Collectors.toList());
